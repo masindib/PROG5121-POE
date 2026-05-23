@@ -6,7 +6,7 @@ package com.mycompany.poeprojectpart1;
 
 /**
  *
- * @author kesao
+ * @author mbedz
  */
 import java.util.ArrayList;
 import java.util.Random;
