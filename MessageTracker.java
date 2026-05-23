@@ -1,0 +1,91 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.messagetracker;
+
+/**
+ *
+ * @author mbedz
+ */
+import java.util. Random;
+public class MessageTracker {
+
+    // Unique Message ID for tracking
+    private String uniqueMessageId;
+
+    // Number of messages sent
+    private int numMessagesSent;
+
+    // Recipient phone number
+    private String recipient;
+
+    public MessageTracker(String recipient) {
+        uniqueMessageId = generateUniqueMessageId();
+        numMessagesSent = 1;
+        setRecipient(recipient);
+    }
+
+    // Generate randomly generated 10-digit message ID
+    private String generateUniqueMessageId() {
+        Random random = new Random();
+        long number = 1000000000L + 
+                     (long)(random.nextDouble() * 9000000000L);
+        return String.valueOf(number);
+    }
+
+    // Increment message count
+    public void incrementMessagesSent() {
+        numMessagesSent++;
+    }
+
+    // Validate and set recipient number
+    public void setRecipient(String recipient) {
+        // Remove spaces and dashes
+        recipient = recipient.replaceAll("[\\s-]", "");
+
+        // Validation:
+        // Starts with international code (+)
+        // Max 10 digits after code example simplified
+        if (recipient.startsWith("+") && recipient.length() <= 13) {
+            this.recipient = recipient;
+        } else {
+            System.out.print(
+                "Invalid recipient number. Must include international code."
+            );
+        }
+    }
+
+    // Getters
+    public String getUniqueMessageId() {
+        return uniqueMessageId;
+    }
+
+    public int getNumMessagesSent() {
+        return numMessagesSent;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    // Display message information
+    public void displayInfo() {
+        System.out.println("Unique Message ID: " + uniqueMessageId);
+        System.out.println("Messages Sent: " + numMessagesSent);
+        System.out.println("Recipient: " + recipient);
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+
+        MessageTracker tracker = new MessageTracker("+1234567890");
+
+        tracker.displayInfo();
+
+        tracker.incrementMessagesSent();
+
+        System.out.println("\nAfter sending another message:");
+        tracker.displayInfo();
+    }
+}
